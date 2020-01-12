@@ -5,7 +5,7 @@ const config = require ('config');
 
 const PORT = config.get('port') || 5000;
 
-app.use('/api/auth/', require('./routes/auth.route'));
+app.use('/api/auth/', require('./routes/auth.router'));
 
 (async function () {
   try {

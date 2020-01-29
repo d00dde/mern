@@ -6,14 +6,14 @@ import './pages.css';
 export default () => {
   const {loading, error, request} = useHttp();
   const [form, setForm] = useState({
-    name: '', password: ''
+    email: '', password: ''
   });
   const inputsHandler = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
   const registerHandler = async () => {
     try {
-      console.log({...form});
+      console.log( [] == false == [1] )
       const data = await request('/api/auth/register', 'POST', {...form});
       console.log('Data: ', data);
     } catch (error) { }
@@ -28,7 +28,7 @@ export default () => {
             <input 
               placeholder='Email' 
               type='text' 
-              name='name'
+              name='email'
               onChange = {inputsHandler}
             />
             <input 

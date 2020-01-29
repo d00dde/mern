@@ -9,15 +9,17 @@ const router = Router();
 
 // api/auth/register/
 router.post(
-	'register/',
+	'/register/',
 	[
 		check('email', 'Некорректный email.').isEmail(),
 		check('password', 'Слишком короткий пароль (минимум 6 символов).').isLength({ min: 6})
 	],
  	async (req, res) => {
   try {
-		console.log('auth serve')
+
+    console.log(req.body);
   	const validatorErrors = validationResult(req);
+
   	if(!validatorErrors.isEmpty()) {
   		return res.status(400).json({ 
   			errors: validatorErrors.array(),

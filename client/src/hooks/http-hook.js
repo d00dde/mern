@@ -26,12 +26,11 @@ export const useHttp = () => {
     } catch (error) {
       console.log(error);
       setLoading(false);
-      setError(error.message);
+      setError(error);
       throw error;
     }
   }, []);
-  const clearErrors = () => {
-    setError(null);
-  }
+  const clearErrors = useCallback(() => {setError(null)}, []);
+
   return {loading, error, request, clearErrors};
 }

@@ -1,20 +1,37 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {useHttp} from '../hooks/http-hook';
+import {useMessage} from '../hooks/message-hook';
+import {AuthContext} from '../context/auth-context';
 import './pages.css';
 
 
 export default () => {
-  const {loading, error, request} = useHttp();
+  const auth = useContext (AuthContext);
+  console.log(auth)
+  const {loading, error, request, clearErrors} = useHttp();
+  const message = useMessage();
   const [form, setForm] = useState({
     email: '', password: ''
   });
+
+  useEffect (() => {
+    message(error.message)
+  }, [error, clearErrors, message])
+
   const inputsHandler = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
   const registerHandler = async () => {
     try {
-      console.log( [] == false == [1] )
       const data = await request('/api/auth/register', 'POST', {...form});
+      message(data.message)
+      console.log('Data: ', data);
+    } catch (error) { }
+  }
+  const loginHandler = async () => {
+    try {
+      const data = await request('/api/auth/login', 'POST', {...form});
+      message(data.message)
       console.log('Data: ', data);
     } catch (error) { }
   }
@@ -46,6 +63,7 @@ export default () => {
             >Регистрация</button>
             <button 
               className='btn'
+              onClick={loginHandler}
               disabled={loading}
             >Вход</button>
           </div>

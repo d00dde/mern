@@ -7,7 +7,6 @@ import './pages.css';
 
 export default () => {
   const auth = useContext (AuthContext);
-  console.log(auth)
   const {loading, error, request, clearErrors} = useHttp();
   const message = useMessage();
   const [form, setForm] = useState({
@@ -31,8 +30,8 @@ export default () => {
   const loginHandler = async () => {
     try {
       const data = await request('/api/auth/login', 'POST', {...form});
-      message(data.message)
-      console.log('Data: ', data);
+      message(data.message);
+      auth.login(data.token, data.userID);
     } catch (error) { }
   }
 

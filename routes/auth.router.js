@@ -1,8 +1,7 @@
 const {Router} = require ('express');
 const bcrypt = require ('bcryptjs');
 const { check, validationResult } = require ('express-validator');
-const jwt = require ('jsonwebtoken');
-const config = require ('config');
+
 
 const User = require('../models/User');
 const router = Router();
@@ -35,8 +34,8 @@ router.post(
 		const user = new User ({ email, password: hashedPassword});
 		await user.save();
     res.status(201).json({ message: 'Пользователь создан.'});
-  } catch (e) {
-    res.status(500).json({message: e.message})
+  } catch (err) {
+    res.status(500).json({message: 'Ошибка сервера.'})
   }
 });
 
@@ -79,7 +78,7 @@ router.post(  //TODO: возможен множественный вход од�
     res.json({ token, userID: user.id , message: 'Успешный вход в систему'});
 
   } catch (e) {
-    res.status(500).json({message: e.message})
+    res.status(500).json({message: 'Ошибка сервера.'})
   }
 });
 

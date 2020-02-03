@@ -46,12 +46,14 @@ export default () => {
               type='text' 
               name='email'
               onChange = {inputsHandler}
+              value={form.email}
             />
             <input 
               placeholder='Password' 
               type='password' 
               name='password'
               onChange = {inputsHandler} 
+              value={form.password}
             />
           </div>  
           <div className="card-action">

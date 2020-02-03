@@ -17,3 +17,6 @@
 .auth-page .card .blue:hover{
   background-color: #42a5f5 !important;
 }
+.create-page input {
+  margin-top: 2rem!important;
+}

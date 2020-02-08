@@ -1,0 +1,4 @@
+.nav-wrapper .active {
+	cursor: default;
+	background-color: #78909c;
+}

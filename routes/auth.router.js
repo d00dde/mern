@@ -37,6 +37,7 @@ router.post(
 		await user.save();
     res.status(201).json({ message: 'Пользователь создан.'});
   } catch (err) {
+    console.log(err.message);
     res.status(500).json({message: 'Ошибка сервера.'})
   }
 });
@@ -50,7 +51,7 @@ router.post(  //TODO: возможен множественный вход од�
 	],
 	async (req, res) => {
   try {
-  	const validatorErrors = validationResult(req);
+    const validatorErrors = validationResult(req);
 
   	if(!validatorErrors.isEmpty()) {
   		return res.status(400).json({ 
@@ -60,7 +61,6 @@ router.post(  //TODO: возможен множественный вход од�
   	}
 
   	const {email, password} = req.body;
-    
     const user = await User.findOne ({ email });
     if(!user) {
     	return res.status(400).json({ message: 'Ошибка авторизации.'}); 
@@ -80,6 +80,7 @@ router.post(  //TODO: возможен множественный вход од�
     res.json({ token, userID: user.id , message: 'Успешный вход в систему'});
 
   } catch (e) {
+    console.log(err.message);
     res.status(500).json({message: 'Ошибка сервера.'})
   }
 });

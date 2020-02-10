@@ -13,7 +13,9 @@ export default () => {
       return;
     }
     try{
-      const data = await request('/api/link/generate', 'POST', { from: link }, { Authorization: `Bearer ${auth.token}`});
+      const data = await request('/api/link/generate', 'POST', { from: link }, { 
+        Authorization: `Bearer ${auth.token}`
+      });
       history.push(`/detail/${data.link._id}`);
     } catch(err) {}
   }

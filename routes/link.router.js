@@ -25,24 +25,27 @@ router.post('/generate', auth, async (req, res) => {
 		res.status(201).json({ link });
 
 	} catch (err) {
+		console.log(err.message);
 		res.status(500).json({message: 'Ошибка сервера.'});
 	}
 });
 
 router.get('/', auth,  async (req, res) => {
 	try {
-		const links = await Linc.findById({owner: req.user.userID});
+		const links = await Link.find({owner: req.user.userID});
 		res.json(links);
 	} catch (err) {
+		console.log(err.message);
 		res.status(500).json({message: 'Ошибка сервера.'});
 	}
 });
 
 router.get('/:id', auth,  async (req, res) => {
 	try {
-		const link = await Linc.findById(req.params.id);
+		const link = await Link.findById(req.params.id);
 		res.json(link);
 	} catch (err) {
+		console.log(err.message);
 		res.status(500).json({message: 'Ошибка сервера.'});
 	}
 });
